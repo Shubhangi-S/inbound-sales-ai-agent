@@ -1,16 +1,16 @@
 ````markdown
-# HappyRobot Carrier Inbound – Starter
+# Inbound Sales AI Agent
 
-This project is a demo for the HappyRobot **Forward Deployed Engineer challenge**.  
-It shows how an **AI voice agent** can answer a carrier’s call, check their details, search for loads, negotiate prices, and record the outcome.  
+This project is a demo of an **AI-powered voice agent** for inbound carrier sales in logistics.  
+The agent can answer a carrier’s call, check their details, search available loads, negotiate prices, and record the outcome in a dashboard.
 
 ---
 
 ## What’s Inside
 - **FastAPI backend** – carrier verification, load search, negotiation, call logging.  
-- **Streamlit dashboard** – simple dashboard showing key call stats.  
+- **Streamlit dashboard** – live dashboard showing key call stats.  
 - **Dockerfile** – to run everything in a container.  
-- **Ngrok support** – so the HappyRobot platform can connect to your local API.  
+- **Ngrok support** – to expose the local API for external integrations.  
 
 ---
 
@@ -21,8 +21,8 @@ You can use either **conda** or **venv**:
 
 ```bash
 # Conda
-conda create -n happyrobot python=3.11 -y
-conda activate happyrobot
+conda create -n inbound-agent python=3.11 -y
+conda activate inbound-agent
 
 # Or venv
 python -m venv .venv
@@ -99,7 +99,11 @@ The dashboard shows:
 
 ---
 
-## Connect to HappyRobot
+## Connect to a Workflow Platform
+
+You can integrate this API with any workflow/voice platform (e.g. Twilio, SignalWire, or an AI agent orchestration tool).
+
+Typical setup:
 
 1. Start ngrok:
 
@@ -109,7 +113,7 @@ The dashboard shows:
 
    Copy the HTTPS URL (e.g. `https://abcd1234.ngrok-free.app`).
 
-2. In HappyRobot, create an **Inbound Call workflow**.
+2. In your platform, create an **Inbound Call workflow**.
 
 3. Attach these tools (Webhooks) with your ngrok URL + header `X-API-Key: dev-key`:
 
@@ -133,8 +137,8 @@ The dashboard shows:
 ## Run with Docker
 
 ```bash
-docker build -t happyrobot-api .
-docker run -p 8080:8080 -e API_KEY=dev-key happyrobot-api
+docker build -t inbound-sales-ai-agent .
+docker run -p 8080:8080 -e API_KEY=dev-key inbound-sales-ai-agent
 ```
 
 ---
@@ -143,7 +147,7 @@ docker run -p 8080:8080 -e API_KEY=dev-key happyrobot-api
 
 * Connect to the real FMCSA API (instead of the mock).
 * Deploy the API to a cloud service like Render or Railway (so no ngrok needed).
-* Store data in a real database.
+* Store data in a production-ready database.
 * Add authentication and monitoring for production use.
 
 ```
